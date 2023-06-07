@@ -1,0 +1,66 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "creation": "2023-06-07 14:43:16.025730",
+ "default_view": "List",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "display",
+  "input",
+  "send",
+  "history"
+ ],
+ "fields": [
+  {
+   "fieldname": "display",
+   "fieldtype": "HTML",
+   "is_virtual": 1,
+   "label": "Display",
+   "read_only": 1
+  },
+  {
+   "fieldname": "input",
+   "fieldtype": "Text",
+   "label": "Input",
+   "max_height": "80px"
+  },
+  {
+   "fieldname": "send",
+   "fieldtype": "Button",
+   "label": "Send"
+  },
+  {
+   "fieldname": "history",
+   "fieldtype": "JSON",
+   "hidden": 1,
+   "label": "History",
+   "read_only": 1
+  }
+ ],
+ "hide_toolbar": 1,
+ "index_web_pages_for_search": 1,
+ "issingle": 1,
+ "links": [],
+ "modified": "2023-06-07 14:43:16.025730",
+ "modified_by": "Administrator",
+ "module": "AIMGPT",
+ "name": "AIM GPT",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "print": 1,
+   "read": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}
