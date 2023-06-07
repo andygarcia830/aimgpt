@@ -3,7 +3,8 @@
 
 import frappe,os,json
 from langchain.llms import OpenAI
-from gpt_index import SimpleDirectoryReader, GPTListIndex, GPTSimpleVectorIndex, LLMPredictor, PromptHelper, ServiceContext
+#from llama_index import SimpleDirectoryReader, GPTListIndex, GPTSimpleVectorIndex, LLMPredictor, PromptHelper, ServiceContext
+from llama_index import StorageContext, load_index_from_storage
 from frappe.model.document import Document
 
 class AIMGPT(Document):
@@ -20,17 +21,20 @@ def api_key():
 
     
     key=os.environ["OPENAI_API_KEY"]
-    #print(f'OPENAI KEY={key}')
+    print(f'OPENAI KEY={key}')
 
 
 @frappe.whitelist()
 def ask_question(msg,jsonStr):
-    api_key()
+    
     jsonDict=json.loads(jsonStr)
     index_file = "../apps/aimgpt/aimgpt/private/index.json"
     print(f'INDEX FILE={index_file}')
-    index = GPTSimpleVectorIndex.load_from_disk(index_file)
-    response = index.query(msg, response_mode="compact")
+    storage_context = StorageContext.from_defaults(persist_dir='../apps/aimgpt/aimgpt/private/')
+    #index = GPTVectorStoreIndex.load_from_disk('/home/andy/frappe-bench/apps/aimgpt/aimgpt/private/')
+    index = load_index_from_storage(storage_context)
+    api_key()
+    response = index.as_query_engine().query(msg)
     jsonDict.append((msg,response.response))
     return jsonDict
 
