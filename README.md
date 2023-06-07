@@ -1,0 +1,7 @@
+## AIMGPT
+
+AIMGPT
+
+#### License
+
+MIT

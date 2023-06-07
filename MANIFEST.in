@@ -1,0 +1,18 @@
+include MANIFEST.in
+include requirements.txt
+include *.json
+include *.md
+include *.py
+include *.txt
+recursive-include aimgpt *.css
+recursive-include aimgpt *.csv
+recursive-include aimgpt *.html
+recursive-include aimgpt *.ico
+recursive-include aimgpt *.js
+recursive-include aimgpt *.json
+recursive-include aimgpt *.md
+recursive-include aimgpt *.png
+recursive-include aimgpt *.py
+recursive-include aimgpt *.svg
+recursive-include aimgpt *.txt
+recursive-exclude aimgpt *.pyc
