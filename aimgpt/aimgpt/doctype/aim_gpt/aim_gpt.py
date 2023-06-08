@@ -42,7 +42,7 @@ def ask_question(msg,jsonStr):
     index = load_index_from_storage(storage_context)
     api_key()
     response = index.as_query_engine().query(prompt)
-    jsonDict.append((msg,response.response))
+    jsonDict.append((msg,response.response.strip('\n')))
     return jsonDict
 
 
