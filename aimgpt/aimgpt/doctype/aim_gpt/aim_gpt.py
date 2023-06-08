@@ -26,9 +26,9 @@ def api_key():
 
 @frappe.whitelist()
 def ask_question(msg,jsonStr):
-    prompt="""You are tasked to give information about AIM's learning programs, 
-    		information is provided to you in the documents provided.
-            Only answer questions about the courses and learning programs in the provided documents. Answer unrelated questions with "Sorry, I can only answer questions about our learning programs."   
+    prompt="""You are tasked to give information about AIM's learning programs. 
+    		Information is available to you in the documents provided.
+            Only answer questions about the courses and learning programs. Answer unrelated questions with "Sorry, I can only answer questions about our learning programs."   
             Only give answers from the provided documents.
             The Question is:
             """
