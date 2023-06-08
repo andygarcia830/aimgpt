@@ -26,7 +26,13 @@ def api_key():
 
 @frappe.whitelist()
 def ask_question(msg,jsonStr):
-    
+    prompt="""You are tasked to give information about AIM's learning programs, 
+    		information is provided to you in the documents provided.
+            Only answer questions about the learning programs. Answer unrelated questions with "Sorry, I can only answer questions about our learning programs."   
+            Only give answers from the provided documents.
+            The Question is:
+            """
+    prompt = prompt+msg 
     jsonDict=json.loads(jsonStr)
     index_file = "../apps/aimgpt/aimgpt/private/index.json"
     print(f'INDEX FILE={index_file}')
@@ -34,7 +40,7 @@ def ask_question(msg,jsonStr):
     #index = GPTVectorStoreIndex.load_from_disk('/home/andy/frappe-bench/apps/aimgpt/aimgpt/private/')
     index = load_index_from_storage(storage_context)
     api_key()
-    response = index.as_query_engine().query(msg)
+    response = index.as_query_engine().query(prompt)
     jsonDict.append((msg,response.response))
     return jsonDict
 
