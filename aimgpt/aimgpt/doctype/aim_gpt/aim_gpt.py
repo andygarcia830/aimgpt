@@ -28,7 +28,6 @@ def api_key():
 def ask_question(msg,jsonStr):
     prompt="""You are tasked to give information about AIM's learning programs. 
     		Only answer questions about the courses and learning programs. Answer unrelated questions with "Sorry, I can only answer questions about our learning programs."   
-            Only give answers from the provided documents.
             The Question is:
             """
     prompt = prompt+msg 
