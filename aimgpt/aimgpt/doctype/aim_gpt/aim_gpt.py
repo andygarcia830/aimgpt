@@ -26,10 +26,13 @@ def api_key():
 
 @frappe.whitelist()
 def ask_question(msg,jsonStr):
-    prompt="""You are tasked to give information about AIM's learning programs. 
-    		Only answer questions about the courses and learning programs. Answer unrelated questions with "Sorry, I can only answer questions about our learning programs."   
-            The Question is:
-            """
+    settings = frappe.get_doc('AIM GPT Settings')
+    prompt = settings.guardrails
+    if prompt == None:
+         prompt = ""
+    prompt=prompt +"""
+    The Question is:
+    """
     prompt = prompt+msg 
     jsonDict=json.loads(jsonStr)
     index_file = "../apps/aimgpt/aimgpt/private/index.json"
