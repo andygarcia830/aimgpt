@@ -7,19 +7,26 @@
  "editable_grid": 1,
  "engine": "InnoDB",
  "field_order": [
-  "guardrails"
+  "guardrails",
+  "sample_questions"
  ],
  "fields": [
   {
    "fieldname": "guardrails",
    "fieldtype": "Code",
    "label": "Guardrails"
+  },
+  {
+   "fieldname": "sample_questions",
+   "fieldtype": "Table",
+   "label": "Sample Questions",
+   "options": "AIM GPT Sample Questions"
   }
  ],
  "index_web_pages_for_search": 1,
  "issingle": 1,
  "links": [],
- "modified": "2023-06-08 21:00:08.694618",
+ "modified": "2023-06-22 14:08:35.437702",
  "modified_by": "Administrator",
  "module": "AIMGPT",
  "name": "AIM GPT Settings",

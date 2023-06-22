@@ -26,6 +26,7 @@ def api_key():
 
 @frappe.whitelist()
 def ask_question(msg,jsonStr):
+    print(f'JSON={jsonStr}')
     settings = frappe.get_doc('AIM GPT Settings')
     prompt = settings.guardrails
     if prompt == None:
@@ -34,6 +35,7 @@ def ask_question(msg,jsonStr):
     The Question is:
     """
     prompt = prompt+msg 
+    print(prompt)
     jsonDict=json.loads(jsonStr)
     index_file = "../apps/aimgpt/aimgpt/private/index.json"
     print(f'INDEX FILE={index_file}')
@@ -46,3 +48,14 @@ def ask_question(msg,jsonStr):
     return jsonDict
 
 
+
+@frappe.whitelist()
+def fetch_sample_questions():
+    settings = frappe.get_doc('AIM GPT Settings')
+    #questions = frappe.get_doc('AIM GPT Sample Questions',settings.sample_questions)
+    questions = settings.sample_questions
+    print(f'QUESTIONS={questions}')
+    result=[]
+    for item in questions:
+          result.append(item.question)
+    return result
