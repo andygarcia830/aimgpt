@@ -1,7 +1,7 @@
 # Copyright (c) 2023, Xurpas Inc. and contributors
 # For license information, please see license.txt
 
-import frappe,os,json
+import frappe,os,json,openai
 from langchain.llms import OpenAI
 #from llama_index import SimpleDirectoryReader, GPTListIndex, GPTSimpleVectorIndex, LLMPredictor, PromptHelper, ServiceContext
 from llama_index import StorageContext, load_index_from_storage
@@ -21,6 +21,7 @@ def api_key():
 
     
     key=os.environ["OPENAI_API_KEY"]
+    openai.api_key=key
     print(f'OPENAI KEY={key}')
 
 
@@ -39,10 +40,11 @@ def ask_question(msg,jsonStr):
     jsonDict=json.loads(jsonStr)
     index_file = "../apps/aimgpt/aimgpt/private/index.json"
     print(f'INDEX FILE={index_file}')
+    api_key()
     storage_context = StorageContext.from_defaults(persist_dir='../apps/aimgpt/aimgpt/private/')
     #index = GPTVectorStoreIndex.load_from_disk('/home/andy/frappe-bench/apps/aimgpt/aimgpt/private/')
     index = load_index_from_storage(storage_context)
-    api_key()
+
     response = index.as_query_engine().query(prompt)
     jsonDict.append((msg,response.response.strip('\n')))
     return jsonDict
@@ -58,4 +60,6 @@ def fetch_sample_questions():
     result=[]
     for item in questions:
           result.append(item.question)
+    ip = frappe.get_request_header('X-Forwarded-For')
+    print(f'REQUEST={ip}')
     return result
